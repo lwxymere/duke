@@ -15,10 +15,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input
+ */
 public class Parser {
     public static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
     public static final DateTimeFormatter PRINT_DATE_FORMAT = DateTimeFormatter.ofPattern("EEE dd MMM yyyy HH':'mm");
 
+    /**
+     * Returns a Command object depending on the command input by the user.
+     * @param fullCommand line input by the user, which represents a command
+     * @return command input by the user, with the appropriate arguments set
+     */
     public static Command parseCommand(String fullCommand) {
         String[] commandTokens = fullCommand.split(" ");
         String commandType = commandTokens[0].toLowerCase();
@@ -49,6 +57,7 @@ public class Parser {
             // add event to tasks
             return prepareEventCommand(fullCommand);
         default:
+            // unknown command name
             return new IncorrectCommand(Ui.UNKNOWN_COMMAND_NAME_MESSAGE);
         }
     }
@@ -80,7 +89,7 @@ public class Parser {
     }
 
     private static Command prepareDeadlineCommand(String fullCommand) {
-        // deadline command follows format <taskType> <taskName> /<date>
+        // deadline command follows format: <taskType> <taskName> /by <date>
         String[] deadlineInfo = null;
         try {
             deadlineInfo = fullCommand
@@ -106,6 +115,7 @@ public class Parser {
     }
 
     private static Command prepareDeleteCommand(String[] commandTokens) {
+        // delete command follows format: delete <deleteIndex>
         try {
             int deleteIndex = Integer.parseInt(commandTokens[1]) - 1;
             return new DeleteCommand(deleteIndex);
@@ -119,6 +129,7 @@ public class Parser {
     }
 
     private static Command prepareDoneCommand(String[] commandTokens) {
+        // done command follows format: done <doneIndex>
         try {
             int doneIndex = Integer.parseInt(commandTokens[1]) - 1;
             return new DoneCommand(doneIndex);
@@ -131,7 +142,7 @@ public class Parser {
     }
 
     private static Command prepareEventCommand(String fullCommand) {
-        // event command follows format <taskType> <taskName> /<date>
+        // event command follows format: <taskType> <taskName> /at <date>
         String[] eventInfo = null;
         try {
             eventInfo = fullCommand
@@ -156,6 +167,7 @@ public class Parser {
     }
 
     private static Command prepareFindCommand(String fullCommand) {
+        // find command follows format: find <searchString>
         try {
             String searchString = fullCommand.substring(FindCommand.FIND_COMMAND_NAME.length() + 1).trim();
             return new FindCommand(searchString);
@@ -165,7 +177,7 @@ public class Parser {
     }
 
     private static Command prepareTodoCommand(String fullCommand) {
-        // to`do command follows format <taskType> <taskName>
+        // to`do command follows format: <taskType> <taskName>
         try {
             String description = fullCommand.substring(TodoCommand.TODO_COMMAND_NAME.length() + 1).trim();
             return new TodoCommand(description);

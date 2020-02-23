@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Handles all input and output of Duke
+ */
 public class Ui {
     public static final String DUKE_LOGO =
             " ____        _        \n"
@@ -45,27 +48,46 @@ public class Ui {
         this.out = System.out;
     }
 
+    /**
+     * Prints a line divider to better format Duke's output.
+     */
     public void showDivider() {
         out.println(DIVIDER);
     }
 
+
+    /**
+     * Prints all messages, separated by a newline.
+     * @param messages strings to be shown to the user
+     */
     public void showToUser(String... messages) {
         for (String message : messages) {
             out.println(message);
         }
     }
 
+    /**
+     * Prints Duke's welcome message.
+     */
     public void showWelcomeMessage() {
         showDivider();
         showToUser("This is", DUKE_LOGO, "How can I help you today?");
         showDivider();
     }
 
+    /**
+     * Prints a message to the user before Duke exits
+     */
     public void showByeMessage() {
         showToUser("Bye then");
         showDivider();
     }
 
+    /**
+     * Shows the user that a task has been successfully added to the TaskList.
+     * @param addedTask the Task object that has been added
+     * @param numTasks number of tasks currently in the TaskList
+     */
     public void showAddedTaskMessage(Task addedTask, int numTasks) {
         showToUser("Task added:",
                 "  " + addedTask,
@@ -73,6 +95,13 @@ public class Ui {
         );
     }
 
+    /**
+     * Shows the user that a task has been successfully deleted from the
+     * TaskList.
+     *
+     * @param deletedTask the Task object that has been deleted
+     * @param numTasks number of tasks currently in the TaskList
+     */
     public void showDeletedTaskMessage(Task deletedTask, int numTasks) {
         showToUser("Task deleted:",
                 "  " + deletedTask,
@@ -80,6 +109,10 @@ public class Ui {
         );
     }
 
+    /**
+     * Shows a prompt to the user, then reads the next line of user input
+     * @return line input by the user
+     */
     public String getUserCommand() {
         out.print("> ");
         out.flush();

@@ -1,13 +1,17 @@
 package duke.task;
 
-import duke.DukeException;
 import duke.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Type of Task that should be done before a specified date.
+ */
 public class Deadline extends Task {
+    /** Icon used to represent a Deadline */
     public static final char DEADLINE_ICON = 'D';
 
+    /** Date before which the Deadline should be done */
     protected LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
@@ -22,6 +26,11 @@ public class Deadline extends Task {
         );
     }
 
+    /**
+     * Returns the object representation of an encoded Deadline.
+     * @param encodedTask a string returned by method Task.encodeTask()
+     * @return a Deadline object whose information was stored in encodedTask
+     */
     public static Deadline decodeTask(String encodedTask) {
         String[] tokens = encodedTask.split("\\" + DELIMITER);
         boolean isDone = Boolean.parseBoolean(tokens[1]);

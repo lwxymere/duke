@@ -5,9 +5,13 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Deletes a Task from the TaskList.
+ */
 public class DeleteCommand extends Command {
+    /** Word to be typed by the user to invoke this Command */
     public static final String DELETE_COMMAND_NAME = "delete";
-    protected final int deleteIndex;
+    private final int deleteIndex;
 
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
@@ -33,5 +37,4 @@ public class DeleteCommand extends Command {
         }
         attemptSave(tasks, ui, storage);
     }
-
 }
