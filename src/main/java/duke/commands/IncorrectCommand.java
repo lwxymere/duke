@@ -4,11 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-/**
- * An invalid or non-existent Command.
- */
 public class IncorrectCommand extends Command {
-    /** Error information to be shown to the user */
     public final String errorMessage;
 
     public IncorrectCommand(String errorMessage) {

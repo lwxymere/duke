@@ -5,13 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-/**
- * Searches for Tasks with descriptions that match a query string.
- */
 public class FindCommand extends Command {
-    /** Word to be typed by the user to invoke this Command */
     public static final String FIND_COMMAND_NAME = "find";
-    private final String searchString;
+    protected final String searchString;
 
     public FindCommand(String searchString) {
         this.searchString = searchString;

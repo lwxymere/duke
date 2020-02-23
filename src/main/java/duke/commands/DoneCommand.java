@@ -6,13 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-/**
- * Changes the status of a Task from 'not done' to 'done'.
- */
 public class DoneCommand extends Command {
-    /** Word to be typed by the user to invoke this Command */
     public static final String DONE_COMMAND_NAME = "done";
-    private final int doneIndex;
+    protected final int doneIndex;
 
     public DoneCommand(int doneIndex) {
         this.doneIndex = doneIndex;
